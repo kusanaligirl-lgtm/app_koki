@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koki AI: Resep Saku</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="container">
+        <!-- Header Banner -->
+        <header class="header-container">
+            <h1 class="main-title">🍲 Koki AI: Resep Saku</h1>
+            <div class="main-subtitle">Solusi anti-bingung masak dari sisa bahan makanan terbatas</div>
+        </header>
+
+        <!-- Form Unggah Foto -->
+        <section class="upload-section">
+            <form action="/" method="POST" enctype="multipart/form-data">
+                <label for="file-upload" class="upload-label">Unggah Foto Bahan Makanan</label>
+                <div class="file-input-wrapper">
+                    <button type="button" class="custom-file-btn" onclick="document.getElementById('file-upload').click()">Pilih Foto</button>
+                    <input type="file" id="file-upload" name="image" class="file-input" accept="image/*" required onchange="displayFileName(this)">
+                </div>
+                <div id="file-name-display" class="file-name-display">Belum ada file terpilih</div>
+                <button type="submit" class="submit-btn">Mulai Deteksi AI</button>
+            </form>
+        </section>
+
+        {% if error_msg %}
+        <div class="empty-warning" style="background-color: #FDA4AF; border-color: #000;">
+            ⚠️ {{ error_msg }}
+        </div>
+        {% endif %}
+
+        <!-- Tampilkan Hasil Jika Ada Deteksi -->
+        {% if results_ready %}
+        <section class="results-grid">
+            <!-- Kolom Kiri: Hasil Deteksi Objek -->
+            <div class="image-card">
+                <h2>🔍 Hasil Deteksi Objek</h2>
+                <img src="{{ url_for('static', filename='uploads/' + annotated_filename) }}" alt="Hasil Deteksi YOLO" class="result-image">
+            </div>
+
+            <!-- Kolom Kanan: Rekomendasi Resep -->
+            <div class="recipe-section">
+                <h2>🛒 Bahan Terdeteksi</h2>
+                <div class="ingredients-container">
+                    {% if detected_ingredients %}
+                        {% for b in detected_ingredients %}
+                        <span class="badge">{{ b }}</span>
+                        {% endfor %}
+                    {% else %}
+                        <div class="empty-warning">Belum ada bahan makanan yang dikenali AI. Pastikan bahan terlihat jelas di foto.</div>
+                    {% endif %}
+                </div>
+
+                {% if detected_ingredients %}
+                <!-- Menu Masak Instan -->
+                <h3 style="margin-top: 1rem;">🍳 Menu Masak Instan (Bahan Lengkap)</h3>
+                {% if resep_bisa %}
+                    {% for nama, langkah in resep_bisa %}
+                    <div class="recipe-card-success">
+                        <div class="recipe-title">🟢 {{ nama }}</div>
+                        <div class="recipe-steps">{{ langkah }}</div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="empty-warning" style="background-color: #E2E8F0;">Bahan-bahanmu belum lengkap untuk membuat menu utama. Coba tambahkan bahan lain.</div>
+                {% endif %}
+
+                <!-- Menu Alternatif -->
+                <h3 style="margin-top: 2rem;">💡 Menu Alternatif (Kurang 1-2 Bahan)</h3>
+                {% if resep_kurang %}
+                    {% for nama, langkah, missing in resep_kurang %}
+                    <div class="recipe-card-warning">
+                        <div class="recipe-title">
+                            🟠 {{ nama }} 
+                            <span class="missing-tag">(Butuh beli: {{ missing|join(', ') }})</span>
+                        </div>
+                        <div class="recipe-steps">{{ langkah }}</div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="empty-warning" style="background-color: #E2E8F0;">Tidak ada resep alternatif yang mendekati bahan sisa kamu.</div>
+                {% endif %}
+                {% endif %}
+            </div>
+        </section>
+        {% endif %}
+    </main>
+
+    <!-- JavaScript Sederhana untuk UI File Upload -->
+    <script>
+        function displayFileName(input) {
+            const display = document.getElementById('file-name-display');
+            if (input.files && input.files.length > 0) {
+                display.innerText = "Foto Terpilih: " + input.files[0].name;
+            } else {
+                display.innerText = "Belum ada file terpilih";
+            }
+        }
+    </script>
+</body>
+</html>

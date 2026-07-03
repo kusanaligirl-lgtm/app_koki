@@ -1,0 +1,263 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700;900&display=swap');
+
+/* Reset and Global Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #FFFDF5; /* Cream background */
+    color: #000000;
+    font-family: 'Lexend', 'Inter', sans-serif;
+    padding: 2rem 1rem;
+    line-height: 1.5;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Headings */
+h1, h2, h3, h4 {
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    margin-bottom: 1rem;
+}
+
+/* Header Banner */
+.header-container {
+    margin-bottom: 3rem;
+}
+
+.main-title {
+    font-size: 3rem;
+    text-align: center;
+    background-color: #A855F7; /* Vibrant Purple */
+    border: 4px solid #000000;
+    box-shadow: 8px 8px 0px 0px #000000;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.main-subtitle {
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-align: center;
+    background-color: #F43F5E; /* Vibrant Rose */
+    border: 3px solid #000000;
+    box-shadow: 5px 5px 0px 0px #000000;
+    padding: 0.75rem;
+    text-transform: uppercase;
+}
+
+/* File Upload Section */
+.upload-section {
+    background-color: #FDE047; /* Bright Yellow */
+    border: 4px solid #000000;
+    box-shadow: 8px 8px 0px 0px #000000;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.upload-label {
+    display: block;
+    font-weight: 900;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.file-input-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.file-input {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.custom-file-btn {
+    display: inline-block;
+    background-color: #ffffff;
+    border: 3px solid #000000;
+    box-shadow: 4px 4px 0px 0px #000000;
+    padding: 0.75rem 1.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.custom-file-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px 0px #000000;
+}
+
+.submit-btn {
+    display: block;
+    width: 100%;
+    margin-top: 1.5rem;
+    background-color: #000000;
+    color: #ffffff;
+    border: 3px solid #000000;
+    box-shadow: 4px 4px 0px 0px #38BDF8; /* Cyan shadow for contrast */
+    padding: 0.75rem;
+    font-weight: 900;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.1s ease;
+}
+
+.submit-btn:hover {
+    background-color: #1e1e1e;
+}
+
+.submit-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px 0px #38BDF8;
+}
+
+.file-name-display {
+    margin-top: 0.75rem;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: #3f3f46;
+}
+
+/* Results Section */
+.results-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.image-card {
+    border: 4px solid #000000;
+    box-shadow: 8px 8px 0px 0px #000000;
+    background-color: #ffffff;
+    padding: 0.5rem;
+}
+
+.result-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 2px solid #000000;
+}
+
+.recipe-section {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Ingredient Badges */
+.ingredients-container {
+    margin-bottom: 2rem;
+}
+
+.badge {
+    background-color: #38BDF8; /* Bright Cyan */
+    color: #000000;
+    border: 3px solid #000000;
+    box-shadow: 3px 3px 0px 0px #000000;
+    padding: 0.4rem 0.8rem;
+    font-weight: 900;
+    font-size: 0.9rem;
+    margin-right: 0.75rem;
+    margin-bottom: 0.75rem;
+    display: inline-block;
+    text-transform: uppercase;
+}
+
+/* Recipe Cards */
+.recipe-card-success {
+    background-color: #86EFAC; /* Pastel Green */
+    border: 4px solid #000000;
+    box-shadow: 6px 6px 0px 0px #000000;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.recipe-card-warning {
+    background-color: #FDA4AF; /* Pastel Rose */
+    border: 4px solid #000000;
+    box-shadow: 6px 6px 0px 0px #000000;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.recipe-title {
+    font-size: 1.4rem;
+    font-weight: 900;
+    border-bottom: 3px solid #000000;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+}
+
+.recipe-steps {
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.6;
+    white-space: pre-line;
+}
+
+.missing-tag {
+    font-size: 0.85rem;
+    font-weight: 900;
+    color: #500f1c;
+    text-transform: uppercase;
+}
+
+/* Empty State Warning */
+.empty-warning {
+    background-color: #38BDF8;
+    border: 3px solid #000000;
+    box-shadow: 5px 5px 0px 0px #000000;
+    padding: 1rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem 0.5rem;
+    }
+    
+    .main-title {
+        font-size: 2rem;
+        box-shadow: 5px 5px 0px 0px #000000;
+    }
+    
+    .main-subtitle {
+        font-size: 0.9rem;
+        box-shadow: 3px 3px 0px 0px #000000;
+    }
+    
+    .results-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .recipe-title {
+        font-size: 1.2rem;
+    }
+    
+    .recipe-steps {
+        font-size: 0.9rem;
+    }
+}
